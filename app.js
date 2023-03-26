@@ -197,10 +197,14 @@ app.post("/login", function(req, res) {
           if (result === true) {
             res.render("main");
           }
+          else{
+              res.render("loginFailure");
+          }
         });
 
       } else {
         console.log("Password Not Correct");
+
       }
     }
 

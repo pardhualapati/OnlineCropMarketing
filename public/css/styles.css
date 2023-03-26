@@ -1,12 +1,37 @@
 .navbar-brand{
 
       margin-left: 2rem;
+      font-family: 'Urbanist', sans-serif;
+        font-size:1.8rem;
 }
+.items{
+    font-family: 'Urbanist', sans-serif;
+    font-size:1.2rem;}
 
 body {
  background-color: #E8ECEF;
+}
 
+.login-container{
+  background-color: white;
+  margin-top:-10rem;
+  font-family: 'Urbanist', sans-serif;
+  font-size:1.5rem;
+}
 
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+
+.card{
+  margin-top: 2rem;
+  margin-left: 8rem;
+  margin-right:20rem;
+  margin-bottom:10rem;
 }
 
 .centered {
