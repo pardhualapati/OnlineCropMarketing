@@ -24,7 +24,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({
   extended: true
 }))
-mongoose.connect( "mongodb+srv://pardhu:pardhu@onlinecropmarketing.5f2ndlt.mongodb.net/?retryWrites=true&w=majority", {
+mongoose.connect("mongodb+srv://pardhu:pardhu@onlinecropmarketing.5f2ndlt.mongodb.net/?retryWrites=true&w=majority", {
   useNewUrlParser: true
 });
 // first created a simple schema and later implimented the new mwthod to create a new model of schema
@@ -69,15 +69,14 @@ const postSchema = mongoose.Schema({
     set: e => e === '' ? undefined : e
   },
 
-  img:
-   {
-       data: Buffer,
-       contentType: String
-   },
+  img: {
+    data: Buffer,
+    contentType: String
+  },
 
   cropName: {
     type: String,
-    required:false,
+    required: false,
     set: f => f === '' ? undefined : f
   },
   cropregion: {
@@ -196,9 +195,8 @@ app.post("/login", function(req, res) {
         bcrypt.compare(password, foundUser.password, function(err, result) {
           if (result === true) {
             res.render("main");
-          }
-          else{
-              res.render("loginFailure");
+          } else {
+            res.render("loginFailure");
           }
         });
 
@@ -215,15 +213,17 @@ app.post("/login", function(req, res) {
 });
 
 var storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads')
-    },
-    filename: (req, file, cb) => {
-       cb(null, file.fieldname + '-' + Date.now())
-    }
+  destination: (req, file, cb) => {
+    cb(null, 'uploads')
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
 });
 
-var upload = multer({ storage: storage });
+var upload = multer({
+  storage: storage
+});
 
 
 app.post("/compose", upload.single("image"), function(req, res) {
@@ -236,9 +236,9 @@ app.post("/compose", upload.single("image"), function(req, res) {
     zip: req.body.pincode,
     address: req.body.address,
     img: {
-        data: fs.readFileSync(path.join(  __dirname + '/uploads/' + req.file.filename)),
-        contentType: 'image/png'
-        },
+      data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+      contentType: 'image/png'
+    },
     cropName: _.lowerCase(req.body.cropName),
 
     cropregion: _.lowerCase(req.body.cropregion),
@@ -263,13 +263,14 @@ app.post("/search", function(req, res) {
       console.log(err);
     } else {
 
-      if(Object.keys(foundPost).length>0){
+      if (Object.keys(foundPost).length > 0) {
 
-  res.render("sucess" ,{users:foundPost});
+        res.render("sucess", {
+          users: foundPost
+        });
+      } else {
+        res.render("failure");
       }
-        else{
-  res.render("failure");
-          }
 
     }
   });
